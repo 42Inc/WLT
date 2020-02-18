@@ -1,0 +1,4 @@
+.ftpconfig
+bin/
+obj/
+data/*
