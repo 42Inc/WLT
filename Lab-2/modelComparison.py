@@ -97,80 +97,79 @@ def PathLosses_costOpen():
 				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) + 3
 	return costO_Wiki, costO_Lect
 
-def dist_hataUrban():
+def dist_hataUrban(hataU_Wiki):
 	antCorrFact_Wiki = 3.2 * ((np.log10(11.75 * heightMS)) ** 2) - 4.97
 	antCorrFact_Lect = 3.2 * (np.log10(11.75 * heightMS)) - 4.97
 
 	# Wiki's formula
-	hataU_Wiki = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-				antCorrFact_Wiki + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist)
+	dist = 10 ** ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+				antCorrFact_Wiki) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	hataU_Lect = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-	 			antCorrFact_Lect + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist)
-	return hataU_Wiki, hataU_Lect
+	dist2 =  10 **  ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+	 			antCorrFact_Lect) / (44.9 - 6.55 * np.log10(heightBS)))
+	return dist, dist2
 
-def dist_hataSub():
+def dist_hataSub(hataS_Wiki):
 	antCorrFact_Wiki = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 	antCorrFact_Lect = 3.2 * (np.log10(11.75 * heightMS)) - 4.97
 
 	# Wiki's formula
-	hataS_Wiki = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-				antCorrFact_Wiki + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) -\
-				2 * ((np.log10(freqTrans / 28)) ** 2) - 5.4
+	dist = 10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+				antCorrFact_Wiki  +	2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	hataS_Lect = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-	 			antCorrFact_Lect + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) -\
-				2 * ((np.log10(freqTrans / 28)) ** 2) - 5.4
-	return hataS_Wiki, hataS_Lect
+	dist2 =  10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+	 			antCorrFact_Lect  +\
+				2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
+	return dist, dist2
 
-def dist_hataOpen():
+def dist_hataOpen(hataO_Wiki):
 	antCorrFact_Wiki = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 	antCorrFact_Lect = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 
 	# Wiki's formula
-	hataO_Wiki = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-				antCorrFact_Wiki + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) -\
-				4.78 * (np.log10(freqTrans) ** 2) + 18.33 * (np.log10(freqTrans)) - 40.94
+	dist = 10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+				antCorrFact_Wiki  +\
+				4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	hataO_Lect = 69.55 + 26.66 * np.log10(freqTrans) - 13.82 * np.log10(heightBS) -\
-	 			antCorrFact_Lect + (44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) -\
-				4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94
-	return hataO_Wiki, hataO_Lect
+	dist2 =  10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+		 			antCorrFact_Lect  +\
+					4.78 * (np.log10(freqTrans) ** 2) + 18.33 * (np.log10(freqTrans)) - 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
 
-def dist_costUrban():
-	# Wiki's formula
-	costU_Wiki = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-				(3.2 * (np.log10(11.75 * heightMS)) ** 2 - 4.97) +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) + 3
-	# Lection's formula
-	costU_Lect = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-				((1.1 * np.log10(freqTrans) - 0.7) * heightMS - (1.5 * np.log10(freqTrans) - 0.8)) - 3 +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) + 3
-	return costU_Wiki, costU_Lect
+	return dist, dist2
 
-def dist_costSub():
+def dist_costUrban(costU_Wiki):
 	# Wiki's formula
-	costS_Wiki = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-				((1.1 * np.log10(freqTrans) - 0.7) * heightMS - (1.56 * np.log10(freqTrans) - 0.8)) +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist)
+	dist = 10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+				(3.2 * (np.log10(11.75 * heightMS)) ** 2 - 4.97)  - 3) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	costS_Lect = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS - (1.5 * np.log10(freqTrans) - 0.8)) -\
-				(2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) + 3
-	return costS_Wiki, costS_Lect
+	dist2 =  10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8))) /\
+				(44.9 - 6.55 * np.log10(heightBS)) )
+	return dist, dist2
 
-def dist_costOpen():
+def dist_costSub(costS_Wiki):
 	# Wiki's formula
-	costO_Wiki = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-				((1.1 * np.log10(freqTrans) - 0.7) * heightMS - (1.56 * np.log10(freqTrans) - 0.8)) +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist)
+	dist = 10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.56 * np.log10(freqTrans) - 0.8))) /\
+				(44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	costO_Lect = 46.3 + 33.9 * (np.log10(freqTrans)) - 13.82 * (np.log10(heightBS)) -\
-	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS - (1.5 * np.log10(freqTrans) - 0.8)) -\
-				(4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94) +\
-				(44.9 - 6.55 * np.log10(heightBS)) * np.log10(dist) + 3
-	return costO_Wiki, costO_Lect
+	dist2 =  10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8)) +\
+				(2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) + 3)/\
+				(44.9 - 6.55 * np.log10(heightBS)))
+	return dist, dist2
+
+def dist_costOpen(costO_Wiki):
+	# Wiki's formula
+	dist = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.56 * np.log10(freqTrans) - 0.8))) /\
+				(44.9 - 6.55 * np.log10(heightBS)))
+	# Lection's formula
+	dist2 = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8)) +\
+				(4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94)  - 3) /\
+				(44.9 - 6.55 * np.log10(heightBS)))
+	return dist, dist2
 
 def drawTable():
 	print()
@@ -185,18 +184,18 @@ def main():
 	PathLosses_costO_Wiki, PathLosses_costO_Lect = PathLosses_costOpen()		# dB
 
 	print("Path Losses: Okumura Hata in Urban Env")
-	print("Wiki:", hataU_Wiki, "\tLection:", hataU_Lect,"\n")
+	print("Wiki:", PathLosses_hataU_Wiki, "\tLection:", PathLosses_hataU_Lect,"\n")
 	print("Path Losses: Okumura Hata in Suburban Env")
-	print("Wiki:", hataS_Wiki, "\tLection:", hataS_Lect,"\n")
+	print("Wiki:", PathLosses_hataS_Wiki, "\tLection:", PathLosses_hataS_Lect,"\n")
 	print("Path Losses: Okumura Hata in Open Env")
-	print("Wiki:", hataO_Wiki, "\tLection:", hataO_Lect,"\n")
+	print("Wiki:", PathLosses_hataO_Wiki, "\tLection:", PathLosses_hataO_Lect,"\n")
 
 	print("Path Losses: COST Hata in Urban Env")
-	print("Wiki:", costU_Wiki, "\tLection:", costU_Lect,"\n")
+	print("Wiki:", PathLosses_costU_Wiki, "\tLection:", PathLosses_costU_Lect,"\n")
 	print("Path Losses: COST Hata in Suburban Env")
-	print("Wiki:", costS_Wiki, "\tLection:", costS_Lect,"\n")
+	print("Wiki:", PathLosses_costS_Wiki, "\tLection:", PathLosses_costS_Lect,"\n")
 	print("Path Losses: COST Hata in Open Env")
-	print("Wiki:", costO_Wiki, "\tLection:", costO_Lect,"\n")
+	print("Wiki:", PathLosses_costO_Wiki, "\tLection:", PathLosses_costO_Lect,"\n")
 
 	RxSenseUser = N_User + ThermalNoise + SIN
 	RxSenseAP = N_AP + ThermalNoise + SIN
@@ -215,13 +214,27 @@ def main():
 	print("Path Losses: MAPL in Open Env")
 	print("Uplink:", MAPL_UL_Open, "\tDowlink:", MAPL_DL_Open,"\n")
 
-	dist_hataU_Wiki, dist_hataU_Lect = dist_hataUrban()		# Km
-	dist_hataS_Wiki, dist_hataS_Lect = dist_hataSub()		# Km
-	dist_hataO_Wiki, dist_hataO_Lect = dist_hataOpen()		# Km
+	dist_hataU_Wiki, dist_hataU_Lect = dist_hataUrban(MAPL_UL_Urban)		# Km
+	dist_hataS_Wiki, dist_hataS_Lect = dist_hataSub(MAPL_UL_SubUrban)		# Km
+	dist_hataO_Wiki, dist_hataO_Lect = dist_hataOpen(MAPL_UL_Open)		# Km
 
-	dist_costU_Wiki, dist_costU_Lect = dist_costUrban()		# Km
-	dist_costS_Wiki, dist_costS_Lect = dist_costSub()		# Km
-	dist_costO_Wiki, dist_costO_Lect = dist_costOpen()		# Km
+	dist_costU_Wiki, dist_costU_Lect = dist_costUrban(MAPL_UL_Urban)		# Km
+	dist_costS_Wiki, dist_costS_Lect = dist_costSub(MAPL_UL_SubUrban)		# Km
+	dist_costO_Wiki, dist_costO_Lect = dist_costOpen(MAPL_UL_Open)			# Km
+
+	print("Path Losses: Okumura Hata in Urban Env")
+	print("Wiki:", dist_hataU_Wiki, "\tLection:", dist_hataU_Lect,"\n")
+	print("Path Losses: Okumura Hata in Suburban Env")
+	print("Wiki:", dist_hataS_Wiki, "\tLection:", dist_hataS_Lect,"\n")
+	print("Path Losses: Okumura Hata in Open Env")
+	print("Wiki:", dist_hataO_Wiki, "\tLection:", dist_hataO_Lect,"\n")
+
+	print("Path Losses: COST Hata in Urban Env")
+	print("Wiki:", dist_costU_Wiki, "\tLection:", dist_costU_Lect,"\n")
+	print("Path Losses: COST Hata in Suburban Env")
+	print("Wiki:", dist_costS_Wiki, "\tLection:", dist_costS_Lect,"\n")
+	print("Path Losses: COST Hata in Open Env")
+	print("Wiki:", dist_costO_Wiki, "\tLection:", dist_costO_Lect,"\n")
 
 	drawTable()
 
