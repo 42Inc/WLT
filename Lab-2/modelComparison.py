@@ -198,20 +198,6 @@ def main():
 	PathLosses_costS_Wiki, PathLosses_costS_Lect = PathLosses_costSub()			# dB
 	PathLosses_costO_Wiki, PathLosses_costO_Lect = PathLosses_costOpen()		# dB
 
-	# print("Path Losses: Okumura Hata in Urban Env")
-	# print("Wiki:", PathLosses_hataU_Wiki, "\tLection:", PathLosses_hataU_Lect)
-	# print("Path Losses: Okumura Hata in Suburban Env")
-	# print("Wiki:", PathLosses_hataS_Wiki, "\tLection:", PathLosses_hataS_Lect)
-	# print("Path Losses: Okumura Hata in Open Env")
-	# print("Wiki:", PathLosses_hataO_Wiki, "\tLection:", PathLosses_hataO_Lect)
-	#
-	# print("Path Losses: COST Hata in Urban Env")
-	# print("Wiki:", PathLosses_costU_Wiki, "\tLection:", PathLosses_costU_Lect)
-	# print("Path Losses: COST Hata in Suburban Env")
-	# print("Wiki:", PathLosses_costS_Wiki, "\tLection:", PathLosses_costS_Lect)
-	# print("Path Losses: COST Hata in Open Env")
-	# print("Wiki:", PathLosses_costO_Wiki, "\tLection:", PathLosses_costO_Lect,"\n")
-
 	RxSenseUser = N_User + ThermalNoise + SIN
 	RxSenseAP = N_AP + ThermalNoise + SIN
 
@@ -223,13 +209,6 @@ def main():
 	MAPL_DL_Open = TxPower_AP + AntG - feeder - RxSenseUser - SlowFading - FreqHop - BodyLoss - BPer[2]
 	MAPL_UL_Open = TxPower_User + AntG - feeder - RxSenseAP - SlowFading - FreqHop - BodyLoss - BPer[2]
 
-	# print("Path Losses: MAPL in Urban Env")
-	# print("Uplink:", MAPL_UL_Urban, "\tDowlink:", MAPL_DL_Urban)
-	# print("Path Losses: MAPL in Suburban Env")
-	# print("Uplink:", MAPL_UL_SubUrban, "\tDowlink:", MAPL_DL_SubUrban)
-	# print("Path Losses: MAPL in Open Env")
-	# print("Uplink:", MAPL_UL_Open, "\tDowlink:", MAPL_DL_Open,"\n")
-
 	# Counting radiuses of MAPL distances
 	radiusArr = [ 0.0 for cnt in range(12)]
 	radiusArr[0], radiusArr[1] = dist_hataUrban(MAPL_UL_Urban)			# Km
@@ -240,37 +219,9 @@ def main():
 	radiusArr[8], radiusArr[9] = dist_costSub(MAPL_UL_SubUrban)			# Km
 	radiusArr[10], radiusArr[11] = dist_costOpen(MAPL_UL_Open)			# Km
 
-	# print("Radius: Okumura Hata in Urban Env")
-	# print("Wiki:", radiusArr[0], "\tLection:", radiusArr[1])
-	# print("Radius: Okumura Hata in Suburban Env")
-	# print("Wiki:", radiusArr[2], "\tLection:", radiusArr[3])
-	# print("Radius: Okumura Hata in Open Env")
-	# print("Wiki:", radiusArr[4], "\tLection:", radiusArr[5])
-	#
-	# print("Radius: COST Hata in Urban Env")
-	# print("Wiki:", radiusArr[6], "\tLection:", radiusArr[7])
-	# print("Radius: COST Hata in Suburban Env")
-	# print("Wiki:", radiusArr[8], "\tLection:", radiusArr[9])
-	# print("Radius: COST Hata in Open Env")
-	# print("Wiki:", radiusArr[10], "\tLection:", radiusArr[11],"\n")
-
 	# Counting radio coverage for 2G networks with both formulas
 	radioCoverageArr = [ 0.0 for cnt in range(12)]
 	radioCoverageArr = radioCoverage2G(radiusArr)
-
-	# print("Area: Okumura Hata in Urban Env")
-	# print("Wiki:", radioCoverageArr[0], "\tLection:", radioCoverageArr[1])
-	# print("Area: Okumura Hata in Suburban Env")
-	# print("Wiki:", radioCoverageArr[2], "\tLection:", radioCoverageArr[3])
-	# print("Area: Okumura Hata in Open Env")
-	# print("Wiki:", radioCoverageArr[4], "\tLection:", radioCoverageArr[5])
-	#
-	# print("Area: COST Hata in Urban Env")
-	# print("Wiki:", radioCoverageArr[6], "\tLection:", radioCoverageArr[7])
-	# print("Area: COST Hata in Suburban Env")
-	# print("Wiki:", radioCoverageArr[8], "\tLection:", radioCoverageArr[9])
-	# print("Area: COST Hata in Open Env")
-	# print("Wiki:", radioCoverageArr[10], "\tLection:", radioCoverageArr[11])
 
 	drawTable(radiusArr, radioCoverageArr)
 
