@@ -102,95 +102,91 @@ def dist_hataUrban(hataU_Wiki):
 	antCorrFact_Lect = 3.2 * (np.log10(11.75 * heightMS)) - 4.97
 
 	# Wiki's formula
-	dist = 10 ** ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+	radiusWiki = 10 ** ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
 				antCorrFact_Wiki) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 =  10 **  ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+	radiusLect = 10 ** ((hataU_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
 	 			antCorrFact_Lect) / (44.9 - 6.55 * np.log10(heightBS)))
-	return dist, dist2
+	return radiusWiki, radiusLect
 
 def dist_hataSub(hataS_Wiki):
 	antCorrFact_Wiki = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 	antCorrFact_Lect = 3.2 * (np.log10(11.75 * heightMS)) - 4.97
 
 	# Wiki's formula
-	dist = 10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
-				antCorrFact_Wiki  +	2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
+	radiusWiki = 10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+				antCorrFact_Wiki + 2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 =  10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
-	 			antCorrFact_Lect  +\
-				2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
-	return dist, dist2
+	radiusLect = 10 ** ((hataS_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+	 			antCorrFact_Lect + 2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) / (44.9 - 6.55 * np.log10(heightBS)))
+	return radiusWiki, radiusLect
 
 def dist_hataOpen(hataO_Wiki):
 	antCorrFact_Wiki = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 	antCorrFact_Lect = 0.8 + (1.1 * np.log10(freqTrans) - 0.7) * heightMS - 1.56 * np.log10(freqTrans)
 
 	# Wiki's formula
-	dist = 10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
-				antCorrFact_Wiki  +\
-				4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
+	radiusWiki = 10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+				antCorrFact_Wiki + 4.78 * (np.log10(freqTrans) ** 2) -\
+				18.33 * (np.log10(freqTrans)) + 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 =  10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
-		 			antCorrFact_Lect  +\
-					4.78 * (np.log10(freqTrans) ** 2) + 18.33 * (np.log10(freqTrans)) - 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
+	radiusLect = 10 ** ((hataO_Wiki - 69.55 - 26.66 * np.log10(freqTrans) + 13.82 * np.log10(heightBS) +\
+		 		antCorrFact_Lect + 4.78 * (np.log10(freqTrans) ** 2) +\
+				18.33 * (np.log10(freqTrans)) - 40.94) / (44.9 - 6.55 * np.log10(heightBS)))
 
-	return dist, dist2
+	return radiusWiki, radiusLect
 
 def dist_costUrban(costU_Wiki):
 	# Wiki's formula
-	dist = 10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusWiki = 10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 				(3.2 * (np.log10(11.75 * heightMS)) ** 2 - 4.97)  - 3) / (44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 =  10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusLect = 10 ** ((costU_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8))) /\
 				(44.9 - 6.55 * np.log10(heightBS)) )
-	return dist, dist2
+	return radiusWiki, radiusLect
 
 def dist_costSub(costS_Wiki):
 	# Wiki's formula
-	dist = 10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusWiki = 10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.56 * np.log10(freqTrans) - 0.8))) /\
 				(44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 =  10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusLect = 10 ** ((costS_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8)) +\
-				(2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) + 3)/\
-				(44.9 - 6.55 * np.log10(heightBS)))
-	return dist, dist2
+				(2 * ((np.log10(freqTrans / 28)) ** 2) + 5.4) + 3) / (44.9 - 6.55 * np.log10(heightBS)))
+	return radiusWiki, radiusLect
 
 def dist_costOpen(costO_Wiki):
 	# Wiki's formula
-	dist = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusWiki = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 				((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.56 * np.log10(freqTrans) - 0.8))) /\
 				(44.9 - 6.55 * np.log10(heightBS)))
 	# Lection's formula
-	dist2 = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
+	radiusLect = 10 ** ((costO_Wiki - 46.3 - 33.9 * (np.log10(freqTrans)) + 13.82 * (np.log10(heightBS)) +\
 	 			((1.1 * np.log10(freqTrans) - 0.7) * heightMS + (1.5 * np.log10(freqTrans) - 0.8)) +\
 				(4.78 * (np.log10(freqTrans) ** 2) - 18.33 * (np.log10(freqTrans)) + 40.94)  - 3) /\
 				(44.9 - 6.55 * np.log10(heightBS)))
-	return dist, dist2
+	return radiusWiki, radiusLect
 
-def radioCoverage2G(dist_hataU_Wiki, dist_hataU_Lect, dist_hataS_Wiki, dist_hataS_Lect,
-					dist_hataO_Wiki, dist_hataO_Lect, dist_costU_Wiki, dist_costU_Lect,
-					dist_costS_Wiki, dist_costS_Lect, dist_costO_Wiki, dist_costO_Lect):
-	area_hataU_Wiki = (dist_hataU_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_hataU_Lect = (dist_hataU_Lect ** 2 - (heightBS / 1000) ** 2) * pi
-	area_hataS_Wiki = (dist_hataS_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_hataS_Lect = (dist_hataS_Lect ** 2 - (heightBS / 1000) ** 2) * pi
-	area_hataO_Wiki = (dist_hataO_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_hataO_Lect = (dist_hataO_Lect ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costU_Wiki = (dist_costU_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costU_Lect = (dist_costU_Lect ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costS_Wiki = (dist_costS_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costS_Lect = (dist_costS_Lect ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costO_Wiki = (dist_costO_Wiki ** 2 - (heightBS / 1000) ** 2) * pi
-	area_costO_Lect = (dist_costO_Lect ** 2 - (heightBS / 1000) ** 2) * pi
+def radioCoverage2G(radiusArr):
+	radioCoverageArr = [ 0.0 for cnt in range(12)]
+	for cnt in range(12):
+		radioCoverageArr[cnt] = (radiusArr[cnt] ** 2 - (heightBS / 1000) ** 2) * pi
 
-	return area_hataU_Wiki, area_hataU_Lect, area_hataS_Wiki, area_hataS_Lect, area_hataO_Wiki, area_hataO_Lect, area_costU_Wiki, area_costU_Lect, area_costS_Wiki, area_costS_Lect, area_costO_Wiki, area_costO_Lect
+	return radioCoverageArr
 
-def drawTable():
-	print()
+def drawTable(radius, coverage):
+	comparisonTable = TT()
+	comparisonTable.set_cols_width([15,10,10,10,10,10,10,10,10])
+	comparisonTable.set_cols_align(["c"] * 9)
+	comparisonTable.header(['','Okumura Hata','','','','COST Hata','','',''])
+	comparisonTable.add_row(['','Radius','','Area','','Radius','','Area',''])
+	comparisonTable.add_row(['','Wiki','Lection','Wiki','Lection','Wiki','Lection','Wiki','Lection'])
+	comparisonTable.add_row(['Urban Env',str(radius[0]), str(radius[1]), str(coverage[0]), str(coverage[1]),str(radius[6]), str(radius[7]), str(coverage[6]), str(coverage[7])])
+	comparisonTable.add_row(['Suburban Env',str(radius[2]), str(radius[3]), str(coverage[2]), str(coverage[3]),str(radius[8]), str(radius[9]), str(coverage[8]), str(coverage[9])])
+	comparisonTable.add_row(['Open Env',str(radius[4]), str(radius[5]), str(coverage[4]), str(coverage[5]),str(radius[10]), str(radius[11]), str(coverage[10]), str(coverage[11])])
+	print(comparisonTable.draw())
 
 def main():
 	# Counting path losses with both formulas: Wiki and lection
@@ -202,19 +198,19 @@ def main():
 	PathLosses_costS_Wiki, PathLosses_costS_Lect = PathLosses_costSub()			# dB
 	PathLosses_costO_Wiki, PathLosses_costO_Lect = PathLosses_costOpen()		# dB
 
-	print("Path Losses: Okumura Hata in Urban Env")
-	print("Wiki:", PathLosses_hataU_Wiki, "\tLection:", PathLosses_hataU_Lect)
-	print("Path Losses: Okumura Hata in Suburban Env")
-	print("Wiki:", PathLosses_hataS_Wiki, "\tLection:", PathLosses_hataS_Lect)
-	print("Path Losses: Okumura Hata in Open Env")
-	print("Wiki:", PathLosses_hataO_Wiki, "\tLection:", PathLosses_hataO_Lect)
-
-	print("Path Losses: COST Hata in Urban Env")
-	print("Wiki:", PathLosses_costU_Wiki, "\tLection:", PathLosses_costU_Lect)
-	print("Path Losses: COST Hata in Suburban Env")
-	print("Wiki:", PathLosses_costS_Wiki, "\tLection:", PathLosses_costS_Lect)
-	print("Path Losses: COST Hata in Open Env")
-	print("Wiki:", PathLosses_costO_Wiki, "\tLection:", PathLosses_costO_Lect,"\n")
+	# print("Path Losses: Okumura Hata in Urban Env")
+	# print("Wiki:", PathLosses_hataU_Wiki, "\tLection:", PathLosses_hataU_Lect)
+	# print("Path Losses: Okumura Hata in Suburban Env")
+	# print("Wiki:", PathLosses_hataS_Wiki, "\tLection:", PathLosses_hataS_Lect)
+	# print("Path Losses: Okumura Hata in Open Env")
+	# print("Wiki:", PathLosses_hataO_Wiki, "\tLection:", PathLosses_hataO_Lect)
+	#
+	# print("Path Losses: COST Hata in Urban Env")
+	# print("Wiki:", PathLosses_costU_Wiki, "\tLection:", PathLosses_costU_Lect)
+	# print("Path Losses: COST Hata in Suburban Env")
+	# print("Wiki:", PathLosses_costS_Wiki, "\tLection:", PathLosses_costS_Lect)
+	# print("Path Losses: COST Hata in Open Env")
+	# print("Wiki:", PathLosses_costO_Wiki, "\tLection:", PathLosses_costO_Lect,"\n")
 
 	RxSenseUser = N_User + ThermalNoise + SIN
 	RxSenseAP = N_AP + ThermalNoise + SIN
@@ -227,67 +223,64 @@ def main():
 	MAPL_DL_Open = TxPower_AP + AntG - feeder - RxSenseUser - SlowFading - FreqHop - BodyLoss - BPer[2]
 	MAPL_UL_Open = TxPower_User + AntG - feeder - RxSenseAP - SlowFading - FreqHop - BodyLoss - BPer[2]
 
-	print("Path Losses: MAPL in Urban Env")
-	print("Uplink:", MAPL_UL_Urban, "\tDowlink:", MAPL_DL_Urban)
-	print("Path Losses: MAPL in Suburban Env")
-	print("Uplink:", MAPL_UL_SubUrban, "\tDowlink:", MAPL_DL_SubUrban)
-	print("Path Losses: MAPL in Open Env")
-	print("Uplink:", MAPL_UL_Open, "\tDowlink:", MAPL_DL_Open,"\n")
+	# print("Path Losses: MAPL in Urban Env")
+	# print("Uplink:", MAPL_UL_Urban, "\tDowlink:", MAPL_DL_Urban)
+	# print("Path Losses: MAPL in Suburban Env")
+	# print("Uplink:", MAPL_UL_SubUrban, "\tDowlink:", MAPL_DL_SubUrban)
+	# print("Path Losses: MAPL in Open Env")
+	# print("Uplink:", MAPL_UL_Open, "\tDowlink:", MAPL_DL_Open,"\n")
 
 	# Counting radiuses of MAPL distances
-	dist_hataU_Wiki, dist_hataU_Lect = dist_hataUrban(MAPL_UL_Urban)		# Km
-	dist_hataS_Wiki, dist_hataS_Lect = dist_hataSub(MAPL_UL_SubUrban)		# Km
-	dist_hataO_Wiki, dist_hataO_Lect = dist_hataOpen(MAPL_UL_Open)			# Km
+	radiusArr = [ 0.0 for cnt in range(12)]
+	radiusArr[0], radiusArr[1] = dist_hataUrban(MAPL_UL_Urban)			# Km
+	radiusArr[2], radiusArr[3] = dist_hataSub(MAPL_UL_SubUrban)			# Km
+	radiusArr[4], radiusArr[5] = dist_hataOpen(MAPL_UL_Open)			# Km
 
-	dist_costU_Wiki, dist_costU_Lect = dist_costUrban(MAPL_UL_Urban)		# Km
-	dist_costS_Wiki, dist_costS_Lect = dist_costSub(MAPL_UL_SubUrban)		# Km
-	dist_costO_Wiki, dist_costO_Lect = dist_costOpen(MAPL_UL_Open)			# Km
+	radiusArr[6], radiusArr[7] = dist_costUrban(MAPL_UL_Urban)			# Km
+	radiusArr[8], radiusArr[9] = dist_costSub(MAPL_UL_SubUrban)			# Km
+	radiusArr[10], radiusArr[11] = dist_costOpen(MAPL_UL_Open)			# Km
 
-	print("Radius: Okumura Hata in Urban Env")
-	print("Wiki:", dist_hataU_Wiki, "\tLection:", dist_hataU_Lect)
-	print("Radius: Okumura Hata in Suburban Env")
-	print("Wiki:", dist_hataS_Wiki, "\tLection:", dist_hataS_Lect)
-	print("Radius: Okumura Hata in Open Env")
-	print("Wiki:", dist_hataO_Wiki, "\tLection:", dist_hataO_Lect)
-
-	print("Radius: COST Hata in Urban Env")
-	print("Wiki:", dist_costU_Wiki, "\tLection:", dist_costU_Lect)
-	print("Radius: COST Hata in Suburban Env")
-	print("Wiki:", dist_costS_Wiki, "\tLection:", dist_costS_Lect)
-	print("Radius: COST Hata in Open Env")
-	print("Wiki:", dist_costO_Wiki, "\tLection:", dist_costO_Lect,"\n")
+	# print("Radius: Okumura Hata in Urban Env")
+	# print("Wiki:", radiusArr[0], "\tLection:", radiusArr[1])
+	# print("Radius: Okumura Hata in Suburban Env")
+	# print("Wiki:", radiusArr[2], "\tLection:", radiusArr[3])
+	# print("Radius: Okumura Hata in Open Env")
+	# print("Wiki:", radiusArr[4], "\tLection:", radiusArr[5])
+	#
+	# print("Radius: COST Hata in Urban Env")
+	# print("Wiki:", radiusArr[6], "\tLection:", radiusArr[7])
+	# print("Radius: COST Hata in Suburban Env")
+	# print("Wiki:", radiusArr[8], "\tLection:", radiusArr[9])
+	# print("Radius: COST Hata in Open Env")
+	# print("Wiki:", radiusArr[10], "\tLection:", radiusArr[11],"\n")
 
 	# Counting radio coverage for 2G networks with both formulas
 	radioCoverageArr = [ 0.0 for cnt in range(12)]
-	radioCoverageArr = radioCoverage2G(dist_hataU_Wiki, dist_hataU_Lect,
-										dist_hataS_Wiki, dist_hataS_Lect,
-										dist_hataO_Wiki, dist_hataO_Lect,
-										dist_costU_Wiki, dist_costU_Lect,
-										dist_costS_Wiki, dist_costS_Lect,
-										dist_costO_Wiki, dist_costO_Lect)
-	print("Area: Okumura Hata in Urban Env")
-	print("Wiki:", radioCoverageArr[0], "\tLection:", radioCoverageArr[1])
-	print("Area: Okumura Hata in Suburban Env")
-	print("Wiki:", radioCoverageArr[2], "\tLection:", radioCoverageArr[3])
-	print("Area: Okumura Hata in Open Env")
-	print("Wiki:", radioCoverageArr[4], "\tLection:", radioCoverageArr[5])
+	radioCoverageArr = radioCoverage2G(radiusArr)
 
-	print("Area: COST Hata in Urban Env")
-	print("Wiki:", radioCoverageArr[6], "\tLection:", radioCoverageArr[7])
-	print("Area: COST Hata in Suburban Env")
-	print("Wiki:", radioCoverageArr[8], "\tLection:", radioCoverageArr[9])
-	print("Area: COST Hata in Open Env")
-	print("Wiki:", radioCoverageArr[10], "\tLection:", radioCoverageArr[11])
+	# print("Area: Okumura Hata in Urban Env")
+	# print("Wiki:", radioCoverageArr[0], "\tLection:", radioCoverageArr[1])
+	# print("Area: Okumura Hata in Suburban Env")
+	# print("Wiki:", radioCoverageArr[2], "\tLection:", radioCoverageArr[3])
+	# print("Area: Okumura Hata in Open Env")
+	# print("Wiki:", radioCoverageArr[4], "\tLection:", radioCoverageArr[5])
+	#
+	# print("Area: COST Hata in Urban Env")
+	# print("Wiki:", radioCoverageArr[6], "\tLection:", radioCoverageArr[7])
+	# print("Area: COST Hata in Suburban Env")
+	# print("Wiki:", radioCoverageArr[8], "\tLection:", radioCoverageArr[9])
+	# print("Area: COST Hata in Open Env")
+	# print("Wiki:", radioCoverageArr[10], "\tLection:", radioCoverageArr[11])
 
-	drawTable()
+	drawTable(radiusArr, radioCoverageArr)
 
 if __name__ == "__main__":
 	try:
 		import sys
 		import numpy as np
 		from math import pi
-		import texttable as tt
+		from texttable import Texttable as TT
 	except Exception as err:
-		print(f"Error while loading dependencies:", err)
+		print("Error while loading dependencies:", err)
 		exit(-1)
 	main()
