@@ -138,7 +138,7 @@ def main():
 
 	drawTable(radiusArr, radioCoverageArr)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	try:
 		import sys
 		import numpy as np
