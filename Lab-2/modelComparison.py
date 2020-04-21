@@ -104,14 +104,13 @@ def radioCoverage2G(radiusArr):
 
 def drawTable(radius, coverage):
 	comparisonTable = TT()
-	comparisonTable.set_cols_width([15,10,10,10,10,10,10,10,10])
-	comparisonTable.set_cols_align(["c"] * 9)
-	comparisonTable.header(['','Okumura Hata','','','','COST Hata','','',''])
-	comparisonTable.add_row(['','Radius','','Area','','Radius','','Area',''])
-	comparisonTable.add_row(['','Wiki','Lection','Wiki','Lection','Wiki','Lection','Wiki','Lection'])
-	comparisonTable.add_row(['Urban Env',str(radius[0]),str(radius[1]),str(coverage[0]),str(coverage[1]),str(radius[6]),str(radius[7]),str(coverage[6]),str(coverage[7])])
-	comparisonTable.add_row(['Suburban Env',str(radius[2]),str(radius[3]),str(coverage[2]),str(coverage[3]),str(radius[8]),str(radius[9]),str(coverage[8]),str(coverage[9])])
-	comparisonTable.add_row(['Open Env',str(radius[4]),str(radius[5]),str(coverage[4]),str(coverage[5]),str(radius[10]),str(radius[11]),str(coverage[10]),str(coverage[11])])
+	comparisonTable.set_cols_width([15,10,10,10,10])
+	comparisonTable.set_cols_align(["c"] * 5)
+	comparisonTable.header(['','Okumura Hata','','COST Hata',''])
+	comparisonTable.add_row(['','Radius','Area','Radius','Area'])
+	comparisonTable.add_row(['Urban Env',str(radius[0]),str(coverage[0]),str(radius[6]),str(coverage[6])])
+	comparisonTable.add_row(['Suburban Env',str(radius[2]),str(coverage[2]),str(radius[8]),str(coverage[8])])
+	comparisonTable.add_row(['Open Env',str(radius[4]),str(coverage[4]),str(radius[10]),str(coverage[10])])
 	print(comparisonTable.draw())
 
 def main():
