@@ -7,17 +7,18 @@
 A = [-10,10]
 B = [-100,100]
 
+dist = [1, 2, 3, 4, 5, 6]
 TxAP = 16			# dBm
 TxUser =			# dBm
 channel = 6
-FreqAP = 2437		# MHz
+FreqAP = 2.437		# GHz
 RxSenseAP = 90		# dBm
 
 Pexp = []
 Ptheo = []
 
 def optiFunc():
-	X(d) = 	26 * np.log10(FreqAP) + 22.7 + 36.7 * np.log10(d)
+	X(d) = 	26 * np.log10(FreqAP) + 22.7 + 36.7 * np.log10(dist)
 	L(d) = A * X(d) + B
 
 def errorRate():
