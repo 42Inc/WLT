@@ -12,7 +12,7 @@ EXECUTABLE := course
 .PHONY: all 
 all: DIRECTORY $(EXECUTABLE)
 
-DIRECTORY: $(BIN_PATH) $(LIB_PATH) 
+DIRECTORY: $(BIN_PATH)
 
 $(BIN_PATH):
 	$(if ifeq test -d "$(BIN_PATH)" 0, @mkdir -p $(BIN_PATH))

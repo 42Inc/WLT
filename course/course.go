@@ -19,6 +19,9 @@ func main() {
 		distance          float64             = 1E+5
 		InteferenceMargin float64             = 5
 		MaxDistance       float64             = 0.0
+		Radius            float64             = 0.0
+		SqNodeBase        float64             = 0.0
+		SpeedRequired     float64             = 0.0
 		TxPowerUserAgent  float64             = 24
 	)
 	clrscr()
@@ -38,7 +41,9 @@ func main() {
 	} else {
 		MaxDistance = binSearchDistanceByPL(0, 1E+4, MAPLUL, conf)
 	}
-
+	Radius = math.Sqrt(math.Pow(MaxDistance, 2) - math.Pow((conf.HeightNodeBase-conf.HeightUserAgent), 2))
+	SqNodeBase = math.Pi * math.Pow(Radius, 2)
+	SpeedRequired = conf.AbonentsCount * conf.MaxDL * 8 / 3600
 	fmt.Printf("RequireSINRBS: %f dB\n", RequireSINRBS)
 	fmt.Printf("RequireSINRUA: %f dB\n", RequireSINRUA)
 	fmt.Printf("ThermalNoise: %f\n", ThermalNoise)
@@ -50,6 +55,9 @@ func main() {
 	fmt.Printf("RxSense UA: %.2f dB\n", RxSenseUE)
 	fmt.Printf("TxPowerNodeBase: %.2f dB\n", TxPowerNodeBase)
 	fmt.Printf("TxPowerUserAgent: %.2f dB\n", TxPowerUserAgent)
+	fmt.Printf("Radius comm : %.2f m\n", Radius)
+	fmt.Printf("Square comm : %.2f m2\n", SqNodeBase)
+	fmt.Printf("Speed Required : %.2f \n", SpeedRequired)
 }
 
 func binSearchDistanceByPL(min float64, max float64, find float64,

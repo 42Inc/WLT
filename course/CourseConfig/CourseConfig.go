@@ -23,7 +23,7 @@ type Config struct {
 	HeightUserAgent     float64 `json:"HeightUserAgent"`
 	PenetrationLoss     float64 `json:"PenetrationLoss"`
 	Square              float64 `json:"Square"`
-	AbonentsCount       int64   `json:"AbonentsCount"`
+	AbonentsCount       float64   `json:"AbonentsCount"`
 	MaxDL               float64 `json:"MaxDL"`
 	SectorsCount        int64   `json:"SectorsCount"`
 	ENodeBCountForSGW   int64   `json:"ENodeBCountForSGW"`
