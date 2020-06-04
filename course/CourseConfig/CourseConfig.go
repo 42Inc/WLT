@@ -28,6 +28,7 @@ type Config struct {
 	SectorsCount        int64   `json:"SectorsCount"`
 	ENodeBCountForSGW   int64   `json:"ENodeBCountForSGW"`
 	ENodeBCountForMME   int64   `json:"ENodeBCountForMME"`
+	RBCount               float64 `json:"RBCount"`
 	Model               string  `json:"Model"`
 }
 
@@ -54,6 +55,7 @@ var (
 		1,
 		100,
 		250,
+		25,
 		""}
 	Alex Config = Config{
 		8,
@@ -77,6 +79,7 @@ var (
 		1,
 		190,
 		390,
+		75,
 		""}
 	Ilya Config = Config{
 		0,
@@ -100,6 +103,7 @@ var (
 		2,
 		170,
 		290,
+		100,
 		""}
 	Sergey Config = Config{
 		5,
@@ -123,6 +127,7 @@ var (
 		1,
 		140,
 		270,
+		25,
 		""}
 	Elena Config = Config{
 		6,
@@ -146,6 +151,7 @@ var (
 		3,
 		160,
 		450,
+		50,
 		""}
 )
 

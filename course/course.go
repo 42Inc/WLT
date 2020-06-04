@@ -10,8 +10,44 @@ import (
 	"./CourseConfig"
 )
 
-var radius_is_print bool = false
-var spectr_is_print bool = false
+var (
+	radius_is_print bool        = false
+	spectr_is_print bool        = false
+	indexMapDown int64 = 0
+	indexMapUp int64 = 0
+	resMap          [][]float64 = [][]float64{
+		{0.0625, 2.1, 0.0, 1, 32},
+		{0.133, 2.9, 0.0, 1, 15},
+		{0.286, 5.1, 0.0, 1, 7},
+		{0.67, 6.3, 0.0, 1, 3},
+		{1.33, 7.9, 0.0, 2, 3},
+		{1.71, 9.5, 0.0, 6, 7},
+		{1.33, 12.9, 0.0, 1, 3},
+		{2.66, 15.4, 0.0, 2, 3},
+		{3.6, 19.8, 0.0, 9, 10},
+		{0.75, 16, 0.0, 1, 8},
+		{2.25, 19.1, 0.0, 3, 8},
+		{3, 20.2, 0.0, 1, 2},
+		{3.75, 21.3, 0.0, 5, 8},
+		{4.5, 24.7, 0.0, 3, 4},
+		{5.4, 26.9, 0.0, 9, 10}}
+	codeMap []string = []string{
+		"qpsk 1/32",
+		"qpsk 1/15",
+		"qpsk 1/7",
+		"qpsk 1/3",
+		"qpsk 1/2",
+		"qpsk 6/7",
+		"qam16 1/3",
+		"qam16 2/3",
+		"qam16 9/10",
+		"qam64 1/8",
+		"qam64 3/8",
+		"qam64 1/2",
+		"qam64 5/8",
+		"qam64 3/4",
+		"qam64 9/10"}
+)
 
 func main() {
 	var (
@@ -23,6 +59,14 @@ func main() {
 		SqNodeBase        float64             = 0.0
 		SpeedRequired     float64             = 0.0
 		TxPowerUserAgent  float64             = 24
+		cp                float64             = 7
+		NumSymInBlock     float64             = 0.0
+		NumSymInCadr      float64             = 0.0
+		NumSymInSec       float64             = 0.0
+		NumSymInBW        float64             = 0.0
+		BitInSec          float64             = 0.0
+		NodeBaseLoad          float64             = 0.0
+		NodeBaseCount          float64             = 0.0
 	)
 	clrscr()
 	CourseConfig.PrintJsonConfig(conf)
@@ -44,6 +88,13 @@ func main() {
 	Radius = math.Sqrt(math.Pow(MaxDistance, 2) - math.Pow((conf.HeightNodeBase-conf.HeightUserAgent), 2))
 	SqNodeBase = math.Pi * math.Pow(Radius, 2)
 	SpeedRequired = conf.AbonentsCount * conf.MaxDL * 8 / 3600
+	NumSymInBlock = cp * 12
+	NumSymInCadr = 2 * NumSymInBlock
+	NumSymInSec = NumSymInCadr * 1E+3
+	NumSymInBW = conf.RBCount * NumSymInSec
+	BitInSec = NumSymInBW * resMap[indexMapDown][3] / resMap[indexMapDown][4]
+	NodeBaseLoad = SpeedRequired / BitInSec
+	NodeBaseCount = conf.Square / SqNodeBase
 	fmt.Printf("RequireSINRBS: %f dB\n", RequireSINRBS)
 	fmt.Printf("RequireSINRUA: %f dB\n", RequireSINRUA)
 	fmt.Printf("ThermalNoise: %f\n", ThermalNoise)
@@ -57,7 +108,14 @@ func main() {
 	fmt.Printf("TxPowerUserAgent: %.2f dB\n", TxPowerUserAgent)
 	fmt.Printf("Radius comm : %.2f m\n", Radius)
 	fmt.Printf("Square comm : %.2f m2\n", SqNodeBase)
-	fmt.Printf("Speed Required : %.2f \n", SpeedRequired)
+	fmt.Printf("Speed Required : %.2f b/s\n", SpeedRequired)
+	fmt.Printf("OFDM symbols in block: %.2f \n", NumSymInBlock)
+	fmt.Printf("OFDM symbols in cadr: %.2f \n", NumSymInCadr)
+	fmt.Printf("OFDM symbols in sec: %.2f \n", NumSymInSec)
+	fmt.Printf("OFDM symbols in BW/sec: %.2f \n", NumSymInBW)
+	fmt.Printf("Bit/sec: %.2f \n", BitInSec)
+	fmt.Printf("Node Base Load: %.2f \n", NodeBaseLoad)
+	fmt.Printf("Node Base Count: %.2f \n", NodeBaseCount)
 }
 
 func binSearchDistanceByPL(min float64, max float64, find float64,
@@ -98,53 +156,39 @@ func getRxSense(c CourseConfig.Config) (float64, float64) {
 
 func getRequireSINR(c CourseConfig.Config) (float64, float64) {
 	var (
-		resBS           float64     = 0.0
-		resUA           float64     = 0.0
-		spectrEffective float64     = 0.0
-		min             float64     = math.MaxFloat64
-		minIndex        int         = 0
-		resMap          [][]float64 = [][]float64{
-			{0.0625, 2.1, 0.0},
-			{0.133, 2.9, 0.0},
-			{0.286, 5.1, 0.0},
-			{0.67, 6.3, 0.0},
-			{1.33, 7.9, 0.0},
-			{1.71, 9.5, 0.0},
-			{1.33, 12.9, 0.0},
-			{2.66, 15.4, 0.0},
-			{3.6, 19.8, 0.0},
-			{0.75, 16, 0.0},
-			{2.25, 19.1, 0.0},
-			{3, 20.2, 0.0},
-			{3.75, 21.3, 0.0},
-			{4.5, 24.7, 0.0},
-			{5.4, 26.9, 0.0}}
+		resBS           float64 = 0.0
+		resUA           float64 = 0.0
+		spectrEffective float64 = 0.0
+		min             float64 = math.MaxFloat64
+		minIndex        int64     = 0
 	)
 	spectrEffective = (c.NeedUL) / (c.BandWidth)
-	if !spectr_is_print {
-		fmt.Printf("Spectr Effective: [%f]", spectrEffective)
-	}
 	for i := range resMap {
 		resMap[i][2] = math.Abs(spectrEffective - resMap[i][0])
 		if min > resMap[i][2] {
 			min = resMap[i][2]
-			minIndex = i
+			minIndex = int64(i)
 		}
+	}
+	if !spectr_is_print {
+		fmt.Printf("Spectr Effectiveint64(:) [%f %s]", spectrEffective, codeMap[minIndex])
+		indexMapUp = minIndex
 	}
 	resBS = resMap[minIndex][1]
 	min = math.MaxFloat64
 	minIndex = 0
 	spectrEffective = (c.NeedDL) / (c.BandWidth)
-	if !spectr_is_print {
-		fmt.Printf("[%f]\n", spectrEffective)
-		spectr_is_print = true
-	}
 	for i := range resMap {
 		resMap[i][2] = math.Abs(spectrEffective - resMap[i][0])
 		if min > resMap[i][2] {
 			min = resMap[i][2]
-			minIndex = i
+			minIndex = int64(i)
 		}
+	}
+	if !spectr_is_print {
+		fmt.Printf("[%f %s]\n", spectrEffective, codeMap[minIndex])
+		indexMapDown = minIndex
+		spectr_is_print = true
 	}
 	resUA = resMap[minIndex][1]
 	return resBS, resUA
