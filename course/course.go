@@ -171,7 +171,7 @@ func getRequireSINR(c CourseConfig.Config) (float64, float64) {
 		}
 	}
 	if !spectr_is_print {
-		fmt.Printf("Spectr Effectiveint64(:) [%f %s]", spectrEffective, codeMap[minIndex])
+		fmt.Printf("Spectr Effective: [%f %s]", spectrEffective, codeMap[minIndex])
 		indexMapUp = minIndex
 	}
 	resBS = resMap[minIndex][1]
