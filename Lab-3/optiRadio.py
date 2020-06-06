@@ -7,14 +7,14 @@
 A = [-10,10]
 B = [-100,100]
 
-dist = 15
+dist = 2
 TxAP = 16			# dBm
 TxUser = 20			# dBm
 channel = 6
 FreqAP = 2.437		# GHz
 RxSenseAP = 90		# dBm
 expCount = 100
-Pexp = -86
+Pexp = -50
 Ptheo = 0
 
 # def HalfLife3(inter):
