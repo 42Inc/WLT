@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"os"
 	"os/exec"
@@ -13,8 +14,8 @@ import (
 var (
 	radius_is_print bool        = false
 	spectr_is_print bool        = false
-	indexMapDown int64 = 0
-	indexMapUp int64 = 0
+	indexMapDown    int64       = 0
+	indexMapUp      int64       = 0
 	resMap          [][]float64 = [][]float64{
 		{0.0625, 2.1, 0.0, 1, 32},
 		{0.133, 2.9, 0.0, 1, 15},
@@ -51,7 +52,7 @@ var (
 
 func main() {
 	var (
-		conf              CourseConfig.Config = CourseConfig.Test
+		conf              CourseConfig.Config = CourseConfig.Alex
 		distance          float64             = 1E+5
 		InteferenceMargin float64             = 5
 		MaxDistance       float64             = 0.0
@@ -65,8 +66,8 @@ func main() {
 		NumSymInSec       float64             = 0.0
 		NumSymInBW        float64             = 0.0
 		BitInSec          float64             = 0.0
-		NodeBaseLoad          float64             = 0.0
-		NodeBaseCount          float64             = 0.0
+		NodeBaseLoad      float64             = 0.0
+		NodeBaseCount     float64             = 0.0
 	)
 	clrscr()
 	CourseConfig.PrintJsonConfig(conf)
@@ -116,6 +117,29 @@ func main() {
 	fmt.Printf("Bit/sec: %.2f \n", BitInSec)
 	fmt.Printf("Node Base Load: %.2f \n", NodeBaseLoad)
 	fmt.Printf("Node Base Count: %.2f \n", NodeBaseCount)
+	writeGraphData(conf, MAPLUL, MAPLDL)
+}
+
+func writeGraphData(c CourseConfig.Config, U float64, D float64) {
+	FilePL, err := os.OpenFile("graph.dat",
+		os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+		FilePLU, err := os.OpenFile("graph1.dat",
+			os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+			FilePLD, err := os.OpenFile("graph2.dat",
+				os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for i := 0.0; i < 1E+4; i = i + 1 {
+    PL := getPathLoses(c, i)
+		FilePL.WriteString(fmt.Sprintf("%f\t%.6f\n", i, PL))
+		FilePLU.WriteString(fmt.Sprintf("%f\t%.6f\n", i, U))
+		FilePLD.WriteString(fmt.Sprintf("%f\t%.6f\n", i, D))
+	}
+
+	FilePL.Close()
+	FilePLU.Close()
+	FilePLD.Close()
 }
 
 func binSearchDistanceByPL(min float64, max float64, find float64,
@@ -160,7 +184,7 @@ func getRequireSINR(c CourseConfig.Config) (float64, float64) {
 		resUA           float64 = 0.0
 		spectrEffective float64 = 0.0
 		min             float64 = math.MaxFloat64
-		minIndex        int64     = 0
+		minIndex        int64   = 0
 	)
 	spectrEffective = (c.NeedUL) / (c.BandWidth)
 	for i := range resMap {
