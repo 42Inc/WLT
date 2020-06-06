@@ -1,0 +1,25 @@
+[H[J{"Variant":6,"FrequencyRange":1950000000,"DuplexMode":"FDD","BandWidth":10000000,"TxPowerNodeBase":40,"AntennaGainNodeBase":19,"FeederLoses":1,"AreaType":"DU","NeedUL":256000,"NeedDL":1200000,"NoiseNodeBase":2.5,"NoiseUserAgent":7.4,"HeightNodeBase":40,"HeightUserAgent":1.7,"PenetrationLoss":25,"Square":180000000000,"AbonentsCount":260000,"MaxDL":10000000,"SectorsCount":3,"ENodeBCountForSGW":160,"ENodeBCountForMME":450,"RBCount":50,"Model":""}
+Radius: 303821.810125 m
+Use model FSPM
+Spectr Effective: [0.025600 qpsk 1/32][0.120000 qpsk 1/15]
+RequireSINRBS: 2.100000 dB
+RequireSINRUA: 2.900000 dB
+ThermalNoise: -104.000000
+MAPL_DL : 127.72 dB
+MAPL_UL : 111.40 dB
+Max distance : 4544.28 m
+PathLoses for 100000.00 m: 138.250692 dB
+RxSense BS: -99.40 dB
+RxSense UA: -93.70 dB
+TxPowerNodeBase: 46.02 dB
+TxPowerUserAgent: 24.00 dB
+Radius comm : 4544.12 m
+Square comm : 40265638.10 m2
+Speed Required : 5777777777.78 b/s
+OFDM symbols in block: 84.00 
+OFDM symbols in cadr: 168.00 
+OFDM symbols in sec: 168000.00 
+OFDM symbols in BW/sec: 8400000.00 
+Bit/sec: 560000.00 
+Node Base Load: 10317.46 
+Node Base Count: 4470.31 

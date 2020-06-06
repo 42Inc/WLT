@@ -82,12 +82,18 @@ func main() {
 		conf.FeederLoses - InteferenceMargin - conf.PenetrationLoss
 
 	if MAPLDL < MAPLUL {
-		MaxDistance = binSearchDistanceByPL(0, 1E+4, MAPLDL, conf)
+		MaxDistance = binSearchDistanceByPL(0, 1E+5, MAPLDL, conf)
 	} else {
-		MaxDistance = binSearchDistanceByPL(0, 1E+4, MAPLUL, conf)
+		MaxDistance = binSearchDistanceByPL(0, 1E+5, MAPLUL, conf)
 	}
 	Radius = math.Sqrt(math.Pow(MaxDistance, 2) - math.Pow((conf.HeightNodeBase-conf.HeightUserAgent), 2))
-	SqNodeBase = math.Pi * math.Pow(Radius, 2)
+	if conf.SectorsCount == 3 {
+		SqNodeBase = 1.95 * math.Pow(Radius, 2)
+	} else if conf.SectorsCount == 2 {
+                SqNodeBase = 1.73 * math.Pow(Radius, 2)
+        } else {
+                SqNodeBase = math.Pi * math.Pow(Radius, 2)
+        }
 	SpeedRequired = conf.AbonentsCount * conf.MaxDL * 8 / 3600
 	NumSymInBlock = cp * 12
 	NumSymInCadr = 2 * NumSymInBlock
