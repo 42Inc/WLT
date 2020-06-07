@@ -1,25 +1,25 @@
-[H[J{"Variant":0,"FrequencyRange":840000000,"DuplexMode":"FDD","BandWidth":20000000,"TxPowerNodeBase":40,"AntennaGainNodeBase":15,"FeederLoses":3,"AreaType":"SU","NeedUL":256000,"NeedDL":900000,"NoiseNodeBase":2,"NoiseUserAgent":7,"HeightNodeBase":80,"HeightUserAgent":1.7,"PenetrationLoss":12,"Square":320000000000,"AbonentsCount":250000,"MaxDL":13000000,"SectorsCount":2,"ENodeBCountForSGW":170,"ENodeBCountForMME":290,"RBCount":100,"Model":""}
-Radius: 430082.664456 m
+[H[J{"Variant":5,"FrequencyRange":3600000000,"DuplexMode":"FDD","BandWidth":5000000,"TxPowerNodeBase":4,"AntennaGainNodeBase":19,"FeederLoses":0.4,"AreaType":"FS","NeedUL":512000,"NeedDL":1100000,"NoiseNodeBase":2.4,"NoiseUserAgent":6.5,"HeightNodeBase":20,"HeightUserAgent":1.6,"PenetrationLoss":19,"Square":10000000000,"AbonentsCount":100000,"MaxDL":13000000,"SectorsCount":1,"ENodeBCountForSGW":140,"ENodeBCountForMME":270,"RBCount":25,"Model":""}
+Radius: 62017.367295 m
 Use model FSPM
-Spectr Effective: [0.012800 qpsk 1/32][0.045000 qpsk 1/32]
-RequireSINRBS: 2.100000 dB
-RequireSINRUA: 2.100000 dB
-ThermalNoise: -100.989700
-MAPL_DL : 132.91 dB
-MAPL_UL : 115.89 dB
-Max distance : 17689.10 m
-PathLoses for 100000.00 m: 130.935586 dB
-RxSense BS: -96.89 dB
-RxSense UA: -91.89 dB
-TxPowerNodeBase: 46.02 dB
+Spectr Effective: [0.102400 qpsk 1/15][0.220000 qpsk 1/7]
+RequireSINRBS: 2.900000 dB
+RequireSINRUA: 5.100000 dB
+ThermalNoise: -107.010300
+MAPL_DL : 126.03 dB
+MAPL_UL : 120.31 dB
+Max distance : 6866.14 m
+PathLoses for 100000.00 m: 143.576050 dB
+RxSense BS: -101.71 dB
+RxSense UA: -95.41 dB
+TxPowerNodeBase: 36.02 dB
 TxPowerUserAgent: 24.00 dB
-Radius comm : 17688.93 m
-Square comm : 541313755.66 m2
-Speed Required : 7222222222.22 b/s
+Radius comm : 6866.11 m
+Square comm : 148105698.80 m2
+Speed Required : 2888888888.89 b/s
 OFDM symbols in block: 84.00 
 OFDM symbols in cadr: 168.00 
 OFDM symbols in sec: 168000.00 
-OFDM symbols in BW/sec: 16800000.00 
-Bit/sec: 525000.00 
-Node Base Load: 13756.61 
-Node Base Count: 591.15 
+OFDM symbols in BW/sec: 4200000.00 
+Bit/sec: 600000.00 
+Node Base Load: 4814.81 
+Node Base Count: 67.52 
