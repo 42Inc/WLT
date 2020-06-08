@@ -16,6 +16,7 @@ var (
 	spectr_is_print bool        = false
 	indexMapDown    int64       = 0
 	indexMapUp      int64       = 0
+	indexMap	int64       = 0
 	resMap          [][]float64 = [][]float64{
 		{0.0625, 2.1, 0.0, 1, 32},
 		{0.133, 2.9, 0.0, 1, 15},
@@ -83,8 +84,10 @@ func main() {
 
 	if MAPLDL < MAPLUL {
 		MaxDistance = binSearchDistanceByPL(0, 1E+5, MAPLDL, conf)
+		indexMap = indexMapDown
 	} else {
 		MaxDistance = binSearchDistanceByPL(0, 1E+5, MAPLUL, conf)
+		indexMap = indexMapUp
 	}
 	Radius = math.Sqrt(math.Pow(MaxDistance, 2) - math.Pow((conf.HeightNodeBase-conf.HeightUserAgent), 2))
 	if conf.SectorsCount == 3 {
@@ -99,7 +102,7 @@ func main() {
 	NumSymInCadr = 2 * NumSymInBlock
 	NumSymInSec = NumSymInCadr * 1E+3
 	NumSymInBW = conf.RBCount * NumSymInSec
-	BitInSec = NumSymInBW * resMap[indexMapDown][3] / resMap[indexMapDown][4]
+	BitInSec = NumSymInBW * resMap[indexMap][3] / resMap[indexMap][4]
 	NodeBaseLoad = SpeedRequired / BitInSec
 	NodeBaseCount = conf.Square / SqNodeBase
 	fmt.Printf("RequireSINRBS: %f dB\n", RequireSINRBS)

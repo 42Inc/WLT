@@ -20,6 +20,6 @@ OFDM symbols in block: 84.00
 OFDM symbols in cadr: 168.00 
 OFDM symbols in sec: 168000.00 
 OFDM symbols in BW/sec: 8400000.00 
-Bit/sec: 560000.00 
-Node Base Load: 10317.46 
+Bit/sec: 262500.00 
+Node Base Load: 22010.58 
 Node Base Count: 4470.31 
