@@ -57,7 +57,7 @@ func main() {
 		PL     float64 = 0.0
 		PLg     float64 = 0.0
 		eps    float64 = 0.01
-		scale  float64 = 0.5
+		scale  float64 = 2
 		minMod float64 = math.MaxFloat64
 		i      float64 = 0
 		j      float64 = 0
