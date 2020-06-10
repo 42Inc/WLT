@@ -8,27 +8,14 @@ A = [-10,10]
 B = [-100,100]
 
 dist = 2
-TxAP = 16			# dBm
+TxAP = 17			# dBm
 TxUser = 20			# dBm
 channel = 6
-FreqAP = 2.437		# GHz
-RxSenseAP = 90		# dBm
+FreqAP = 2.462		# GHz
+RxSenseAP = 71		# dBm
 expCount = 100
-Pexp = -50
+Pexp = -53
 Ptheo = 0
-
-# def HalfLife3(inter):
-# 	leftBorder = inter[0]
-# 	rightBorder = inter[1]
-# 	while (rightBorder - leftBorder > 1):
-# 		length = rightBorder - leftBorder
-# 		halflife = int(length / 2)
-# 		mid = leftBorder + halflife
-# 		if (leftBorder >= 0) and (mid < 0):
-# 			rightBorder = mid
-# 		else:
-# 			leftBorder = mid
-# 	return mid
 
 def optiFunc(Ad, Bd):
 	minO = 100000000
@@ -48,16 +35,8 @@ def optiFunc(Ad, Bd):
 	Ptheo = float(minA) * float(PathLosses) + minB
 	print("Distance =", dist, "\tPathLosses =", Ptheo, "\tPexp =", Pexp, "\tminA =", minA, "\tminB =", minB)
 
-# def errorRate():
-# 	for iter in range(expCount):
-# 		err += (Ptheo - Pexp) ** 2
-# 	return err
-
 def main():
-	# Amin = HalfLife3(A)
-	# Bmin = HalfLife3(B)
 	optiFunc(A, B)
-	# err = errorRate()
 
 if __name__ == '__main__':
 	try:
