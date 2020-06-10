@@ -14,6 +14,7 @@ var (
 	TxPAP     float64 = 0.0
 	RxPUA     float64 = 0.0
 	AgAP      float64 = 0.0
+	eps       float64 = 0.01
 )
 
 func initFlags() {
@@ -28,6 +29,8 @@ func initFlags() {
 		"TxAP (dB)")
 	flag.Float64Var(&AgAP, "ag", 2.5,
 		"Antenna Gain (dB)")
+	flag.Float64Var(&eps, "e", 2.5,
+		"Epsilon ")
 	flag.Parse()
 }
 
@@ -55,8 +58,7 @@ func main() {
 		Bmid   float64 = 0
 		RxPUA  float64 = 0.0
 		PL     float64 = 0.0
-		PLg     float64 = 0.0
-		eps    float64 = 0.01
+		PLg    float64 = 0.0
 		scale  float64 = 2
 		minMod float64 = math.MaxFloat64
 		i      float64 = 0
@@ -69,15 +71,15 @@ func main() {
 	fmt.Printf("Receive Power UA: [%f | %f]\n", RxPUA, Pexp)
 	fmt.Printf("=============================\n")
 
-	for math.Abs(Pexp - RxPUA) > eps {
+	for math.Abs(Pexp-RxPUA) > eps {
 		scale = scale / 2
 		minMod = math.MaxFloat64
 		for i = 0; i < (Aup - Alow); i = i + scale {
 			for j = 0; j < (Bup - Blow); j = j + scale {
 				PL = (Alow+i)*PLg + (Blow + j)
 				RxPUA = TxPAP + AgAP - PL
-				if minMod >= math.Pow(Pexp - RxPUA, 2) && ((Alow+i) < 0 || (Alow+i) > 0) {
-					minMod = math.Pow(Pexp - RxPUA, 2)
+				if minMod >= math.Pow(Pexp-RxPUA, 2) && ((Alow+i) < 0 || (Alow+i) > 0) {
+					minMod = math.Pow(Pexp-RxPUA, 2)
 					Amid = (Alow + i)
 					Bmid = (Blow + j)
 				}
