@@ -10,23 +10,56 @@ controlChannel = 2						# Число каналов управления на о
 Pblock = 0.05							# Вероятность отказа в установлении соединения абонента
 loadIntensity = 0.03					# Интенсивность нагрузки одного абонента в ЧНН (Час Наибольшей Нагрузки): g
 
-# Варианты: 0, 5, 6, 8
-# Исходные данные для расчета абонентской емкости сетей 3G
-R = [22.4, 14.5, 13, 16.2]				# Скорость передачи данных для голосовых услуг R, кбит/с
-SINR = [9, 6.7, 6.6, 7.2]				# Требуемое отношение сигнал/шум для голоса E/N, дБ
-WCDMA = [3.84, 3.84, 3.84, 3.84]		# Чиповая скорость в WCDMA (UMTS) W, Мчип/с
-alpha = [0.9, 0.6, 0.65, 0.75]			# Коэффициент ортогональности кода α
-inter = [0.6, 0.7, 0.75, 0.85]			# Коэффициент интерференции по соседней соте i для сот со всенаправленной антенной
-sho = [0.5, 0.33, 0.36, 0,43]			# Затраты ресурсов на мягкий хэндовер SHOOH
-Eta = [0.65, 0.63, 0.68, 0.8]			# Коэффициент загрузки нисходящего канала ηDL
-u = [0.69, 0.64, 0.65, 0.67]			# Коэффициент активности абонента u
-
 # Исходные данные для расчета абонентской емкости сетей 4G
 # Режим MIMO: 2x2, пространственное мультиплексирование (spacial multiplexing);
 # Используемая схема модуляции и кодирования MCS: QAM16 4/5;
 # Режим дуплексирования UL и DL: FDD;
 bandwith = 10							# Ширина полосы частот, МГц
-cyclePrefix = normal					# Циклический префикс ???
-sendSpeed = 20							# Требуемая скорость передачи данных для одного голосового абонента на физическом уровне: c
-resourceCost = 30						# Затраты частотно-временных ресурсов на каналы управления и вспомогательные сигналы: %
-harq = 10								# Процент ретрансмиссий MAC-уровня HARQ: %
+cyclePrefix = 1							 # Циклический префикс ???
+sendSpeed = 20000						# Требуемая скорость передачи данных для одного голосового абонента на физическом уровне: бит/с
+resourceCost = 0.3						# Затраты частотно-временных ресурсов на каналы управления и вспомогательные сигналы: %
+harq = 0.1								# Процент ретрансмиссий MAC-уровня HARQ: %
+
+def factorial(num):
+	factVal = 1
+	i = 0
+	if num < 0:
+		return 0
+	else:
+		for i in range(1, int(num)):
+			factVal *= i
+	return factVal
+
+def capacity2G():
+	res = 0
+	left = 0
+	eps = 0.01
+	right = transceiverPerBS
+	while (abs(m.factorial(transceiverPerBS) * Pblock - res) > eps):
+		mid = (right - left) / 2 + left
+		res = mid ** 3 / m.e ** mid
+		if res > m.factorial(transceiverPerBS) * Pblock:
+			right = mid
+		else:
+			left = mid
+	abonentsCnt = res / loadIntensity
+	print("2G abonents total:", abonentsCnt)
+
+def capacity4G():
+	smblCnt = 7 * 50 * 2 * 1000 * 2
+	actualData = smblCnt - smblCnt / 5 - smblCnt * harq - smblCnt * resourceCost
+	transmissionSpeed = actualData * 3
+	abonentsCnt = transmissionSpeed / sendSpeed
+	print("4G abonents total:", abonentsCnt)
+
+def main():
+	capacity2G()
+	capacity4G()
+
+if __name__ == '__main__':
+	try:
+		import math as m
+		import numpy as np
+	except Exception as e:
+		exit(e)
+	main()
